@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from "react";
+import TodoItem from "./TodoItem";
+import "./style.css";
 
 class TodoList extends Component {
 	constructor(props) {
@@ -13,7 +15,10 @@ class TodoList extends Component {
 	render() {
 		return (
 			<Fragment>
+				<label htmlFor='insertArea'>Input</label>
 				<input
+					id='insertArea'
+					className='input'
 					value={this.state.inputValue}
 					onChange={this.handleInputChange.bind(this)}
 				/>
@@ -21,9 +26,19 @@ class TodoList extends Component {
 				<ul>
 					{this.state.list.map((item, index) => {
 						return (
-							<li key={index} onClick={this.handleItemDelete.bind(this, index)}>
-								{item}
-							</li>
+							<div>
+								<TodoItem
+									content={item}
+									index={index}
+									deleteItem={this.handleItemDelete.bind(this)}
+								/>
+
+								{/*<li
+                                    key={index}
+                                    onClick={this.handleItemDelete.bind(this, index)}
+                                    dangerouslySetInnerHTML={{ __html: item }}
+                                ></li>*/}
+							</div>
 						);
 					})}
 				</ul>
